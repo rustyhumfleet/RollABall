@@ -38,10 +38,10 @@ public class GameManager : MonoBehaviour
     //Initializes the game for each level.S
     void InitGame()
     {
-        Debug.Log("<color=blue>before</color>");
+        Debug.Log("<color=blue>before SetupScene</color>");
         //Call the SetupScene function of the LevelManager script, pass it current level number.
         levelManagerScript.SetupScene(level);
-        Debug.Log("<color=blue>after</color>");
+        Debug.Log("<color=blue>after SetupScene</color>");
 
     }
 

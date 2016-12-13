@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;       //Allows us to use Lists.
 using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine random number generator.
+using UnityEditor; // access prefabs from assets folder
+
 
 public class LevelManager : MonoBehaviour
 {
@@ -56,33 +58,43 @@ public class LevelManager : MonoBehaviour
     //public Transform ground;
     public GameObject ground;
 
-    //Clears our list gridPositions and prepares it to generate a new board.
-    void InitializeList()
-    {
-        //Clear our list gridPositions.
-        gridPositions.Clear();
+    ////Clears our list gridPositions and prepares it to generate a new board.
+    //void InitializeList()
+    //{
+    //    //Clear our list gridPositions.
+    //    gridPositions.Clear();
 
-        ////Loop through x axis (columns).
-        //for (int x = 1; x < columns - 1; x++)
-        //{
-        //    //Within each column, loop through y axis (rows).
-        //    for (int y = 1; y < rows - 1; y++)
-        //    {
-        //        //At each index add a new Vector3 to our list with the x and y coordinates of that position.
-        //        gridPositions.Add(new Vector3(x, y, 0f));
-        //    }
-        //}
-    }
+    //    ////Loop through x axis (columns).
+    //    //for (int x = 1; x < columns - 1; x++)
+    //    //{
+    //    //    //Within each column, loop through y axis (rows).
+    //    //    for (int y = 1; y < rows - 1; y++)
+    //    //    {
+    //    //        //At each index add a new Vector3 to our list with the x and y coordinates of that position.
+    //    //        gridPositions.Add(new Vector3(x, y, 0f));
+    //    //    }
+    //    //}
+    //}
 
 
     //Sets up the outer walls and floor (background) of the game board.
     void LevelSetup()
     {
-        //Instantiate Board and set levelHolder to its transform. // used to be "Board"
+        //Instantiate Board and set levelHolder to its transform. 
         levelHolder = new GameObject("Level").transform;
 
+        Debug.Log("<color=red>pre boom</color>");
 
-        //GameObject toInst = Instantiate(ground, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Ground.prefab", typeof(GameObject));
+        GameObject clone = Instantiate(prefab, new Vector3(0,-1,0), Quaternion.identity) as GameObject;
+        
+        // Modify the clone to your heart's content
+        //clone.transform.position = Vector3.one;
+
+
+        Debug.Log("<color=red>boom</color>");
+
+        //GameObject toInst = Instantiate(ground, ground.transform.position, Quaternion.identity) as GameObject;
         //toInst.transform.SetParent(levelHolder);
 
         Debug.Log("<color=red>inst ground:</color>");
@@ -107,8 +119,8 @@ public class LevelManager : MonoBehaviour
         //GameObject instance =
         //    Instantiate(wallsToInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
 
-        ////Set the parent of our newly instantiated object instance to levelHolder, this is just organizational to avoid cluttering hierarchy.
-        //instance.transform.SetParent(levelHolder);
+        //Set the parent of our newly instantiated object instance to levelHolder, this is just organizational to avoid cluttering hierarchy.
+        clone.transform.SetParent(levelHolder);
 
         //old code
 
@@ -177,12 +189,13 @@ public class LevelManager : MonoBehaviour
     //SetupScene initializes our level and calls the previous functions to lay out the game level
     public void SetupScene(int level)
     {
+        Debug.Log("<color=red>SetupScene:</color>");
         //Creates the outer walls and floor.
         LevelSetup();
         Debug.Log("<color=red>SetupScene:</color>");
 
         //Reset our list of gridpositions.
-        InitializeList();
+        //InitializeList();
 
         //Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
         //LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
