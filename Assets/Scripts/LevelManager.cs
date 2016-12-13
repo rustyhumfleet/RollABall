@@ -5,7 +5,6 @@ using System.Collections.Generic;       //Allows us to use Lists.
 using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine random number generator.
 using UnityEditor; // access prefabs from assets folder
 
-
 public class LevelManager : MonoBehaviour
 {
 
@@ -50,10 +49,12 @@ public class LevelManager : MonoBehaviour
     public GameObject[] wallTiles;                                  //Array of wall prefabs.
     //public GameObject[] foodTiles;                                  //Array of food prefabs.
     //public GameObject[] enemyTiles;                                 //Array of enemy prefabs.
-    public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
+    public GameObject[] outerWallPrefabs;                             //Array of outer wall prefabs.
 
-    private Transform levelHolder;                                  //A variable to store a reference to the transform of our Board object.
-    private List<Vector3> gridPositions = new List<Vector3>();   //A list of possible locations to place tiles.
+    private Transform levelHolder;                                  //A variable to store a reference to the transform of our Level object for Hierarchy.
+    private Transform wallHolder;                                  //A variable to store a reference to the transform of our Wall objects for Hierarchy.
+    private Transform pickUpHolder;                                  //A variable to store a reference to the transform of our Pick Up objects for Hierarchy.
+    //private List<Vector3> gridPositions = new List<Vector3>();   //A list of possible locations to place tiles.
 
     //public Transform ground;
     public GameObject ground;
@@ -77,50 +78,46 @@ public class LevelManager : MonoBehaviour
     //}
 
 
-    //Sets up the outer walls and floor (background) of the game board.
+    //Sets up the outer walls and floor (background) of the game level.
     void LevelSetup()
     {
-        //Instantiate Board and set levelHolder to its transform. 
+        //Instantiate holders and set its transform to position in the hierarchy. 
         levelHolder = new GameObject("Level").transform;
+        wallHolder = new GameObject("OuterWalls").transform;        
 
-        Debug.Log("<color=red>pre boom</color>");
-
+        //instantiate ground from the assets folder if its not in the scene
         UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Ground.prefab", typeof(GameObject));
-        GameObject clone = Instantiate(prefab, new Vector3(0,-1,0), Quaternion.identity) as GameObject;
-        
-        // Modify the clone to your heart's content
-        //clone.transform.position = Vector3.one;
-
-
-        Debug.Log("<color=red>boom</color>");
-
-        //GameObject toInst = Instantiate(ground, ground.transform.position, Quaternion.identity) as GameObject;
-        //toInst.transform.SetParent(levelHolder);
-
-        Debug.Log("<color=red>inst ground:</color>");
-
-        // instantiate floors
-        // this should be an array of planes
-        //GameObject groundsToInstantiate = groundTiles[0];
-
-        ////Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject. 
-        //GameObject instance =
-        //    Instantiate(groundsToInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
-
-        ////Set the parent of our newly instantiated object instance to levelHolder, this is just organizational to avoid cluttering hierarchy.
-        //instance.transform.SetParent(levelHolder);
-
-
-        // instantiate walls
-        // this should be an array of rectangles
-        //GameObject wallsToInstantiate = outerWallTiles[0];
-
-        ////Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
-        //GameObject instance =
-        //    Instantiate(wallsToInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+        GameObject groundClone = Instantiate(prefab, new Vector3(0,-1,0), Quaternion.identity) as GameObject;
 
         //Set the parent of our newly instantiated object instance to levelHolder, this is just organizational to avoid cluttering hierarchy.
-        clone.transform.SetParent(levelHolder);
+        groundClone.transform.SetParent(levelHolder);
+
+        // instantiate walls
+        // this should be an array of wall prefabs
+        // north is 0 0 10
+        // east is 10 0 0
+        // south is 0 0 -10
+        // west is -10 0 0
+
+        //GameObject wallsToInstantiate = outerWallPrefabs[0];
+        GameObject outerWallClone;
+        foreach (var outerwall in outerWallPrefabs)
+        {
+            //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current position cast it to GameObject.
+            outerWallClone =
+                Instantiate(outerwall, outerwall.transform.position, Quaternion.identity) as GameObject;
+            //Set the parent of our newly instantiated object instance to levelHolder, this is just organizational to avoid cluttering hierarchy.
+            outerWallClone.transform.SetParent(wallHolder);
+            //// Move object
+            //outerWallClone.transform.position = new Vector3(0, 0, 0);
+        }
+
+        // set wall holder to levelholder in the hierarchy
+        wallHolder.transform.SetParent(levelHolder);
+
+
+
+
 
         //old code
 
@@ -189,10 +186,12 @@ public class LevelManager : MonoBehaviour
     //SetupScene initializes our level and calls the previous functions to lay out the game level
     public void SetupScene(int level)
     {
-        Debug.Log("<color=red>SetupScene:</color>");
+        //TODO: Find what level and build that level
+
+
+
         //Creates the outer walls and floor.
         LevelSetup();
-        Debug.Log("<color=red>SetupScene:</color>");
 
         //Reset our list of gridpositions.
         //InitializeList();

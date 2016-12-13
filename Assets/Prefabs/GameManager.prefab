@@ -40,6 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbdc3f7b345e8d48a908ceda41d6ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ground: {fileID: 0}
 --- !u!114 &11467680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,14 +54,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTiles: []
   wallTiles: []
-  outerWallTiles: []
+  outerWallPrefabs:
+  - {fileID: 107362, guid: 9e33f91878bc00b4b9e93fd63688e394, type: 2}
+  - {fileID: 125666, guid: 045962a1c800cda4081c471a42154adb, type: 2}
+  - {fileID: 199262, guid: bf3acb487303ea848a8a08a1d51224c6, type: 2}
+  - {fileID: 150308, guid: 68aff798cf0134042b59c20c5b498cf2, type: 2}
+  ground: {fileID: 169908, guid: e6569c1004a548a4c9a3bea3bfc1dab1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: outerWallPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ground
+      value: 
+      objectReference: {fileID: 169908, guid: e6569c1004a548a4c9a3bea3bfc1dab1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172632}

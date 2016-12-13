@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private LevelManager levelManagerScript;                       //Store a reference to our LevelManager which will set up the level.
     private int level = 1;                                  //Current level number
 
-    public GameObject ground;
+    //public GameObject ground;
 
     //Awake is always called before any Start functions
     void Awake()
@@ -38,10 +38,8 @@ public class GameManager : MonoBehaviour
     //Initializes the game for each level.S
     void InitGame()
     {
-        Debug.Log("<color=blue>before SetupScene</color>");
         //Call the SetupScene function of the LevelManager script, pass it current level number.
         levelManagerScript.SetupScene(level);
-        Debug.Log("<color=blue>after SetupScene</color>");
 
     }
 
