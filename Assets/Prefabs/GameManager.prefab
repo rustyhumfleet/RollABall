@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 421764}
-  - 114: {fileID: 11439728}
-  - 114: {fileID: 11467680}
+  - component: {fileID: 421764}
+  - component: {fileID: 11439728}
+  - component: {fileID: 11467680}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -29,6 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11439728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -58,6 +59,8 @@ MonoBehaviour:
   - {fileID: 125666, guid: 045962a1c800cda4081c471a42154adb, type: 2}
   - {fileID: 199262, guid: bf3acb487303ea848a8a08a1d51224c6, type: 2}
   - {fileID: 150308, guid: 68aff798cf0134042b59c20c5b498cf2, type: 2}
+  outerWallPrefab: {fileID: 1588539647038878, guid: eddd061cb5577874aa5b4b9cd376e567,
+    type: 2}
   groundPrefab: {fileID: 169908, guid: e6569c1004a548a4c9a3bea3bfc1dab1, type: 2}
   pickUpPrefab: {fileID: 153480, guid: 5ba28a5841bbcdf4fa1efa76493e9f73, type: 2}
 --- !u!1001 &100100000
