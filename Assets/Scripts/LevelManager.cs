@@ -155,6 +155,9 @@ public class LevelManager : MonoBehaviour
         } // end level 1
     } // end BuildWalls
 
+
+
+
     private void CreateHierarchyLayout()
     {
         // Instantiate holders and set its transform to position in the hierarchy. 

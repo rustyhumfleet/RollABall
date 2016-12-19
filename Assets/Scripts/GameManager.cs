@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 	private LevelManager levelManagerScript;                       //Store a reference to our LevelManager which will set up the level.
-	private int level = 1;                                  //Current level number
+    //private PlayerManager playerManagerScript;                       //Store a reference to our PlayerManager which will set up the level.
+    private int level = 1;                                  //Current level number
 
 	//public GameObject ground;
 
@@ -30,8 +32,12 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 		//Get a component reference to the attached LevelManager script
 		levelManagerScript = GetComponent<LevelManager>();
-		//Call the InitGame function to initialize the first level 
-		InitGame();
+        ////Get a component reference to the attached PlayerManager script
+        //playerManagerScript = GetComponent<PlayerManager>();
+        ////playerManagerScript = GameObject.Find("Player").GetComponent("PlayerManager") as PlayerManager;
+        
+        //Call the InitGame function to initialize the first level 
+        InitGame();
 
 	}
 
@@ -41,6 +47,8 @@ public class GameManager : MonoBehaviour
 		//Call the SetupScene function of the LevelManager script, pass it current level number.
 		levelManagerScript.SetupScene(level);
 
+        //// Call the SetupPlayer function of the PlayerManager script.
+        //playerManagerScript.SetupPlayer();
 	}
 
 
@@ -48,6 +56,12 @@ public class GameManager : MonoBehaviour
 	//Update is called every frame.
 	void Update()
 	{
+        // check player movement
+        // check if game won
+        // check if player killed
+        // check to see if we need to end the level
+        // check to see if we need to begin the next level
+        // check to see if we need to end the game
+    }
 
-	}
 }
