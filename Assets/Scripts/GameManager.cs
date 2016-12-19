@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 	private LevelManager levelManagerScript;                       //Store a reference to our LevelManager which will set up the level.
-    //private PlayerManager playerManagerScript;                       //Store a reference to our PlayerManager which will set up the level.
+    private PlayerManager playerManagerScript;                       //Store a reference to our PlayerManager which will set up the level.
     private int level = 1;                                  //Current level number
 
 	//public GameObject ground;
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 		//Get a component reference to the attached LevelManager script
 		levelManagerScript = GetComponent<LevelManager>();
         ////Get a component reference to the attached PlayerManager script
-        //playerManagerScript = GetComponent<PlayerManager>();
+        playerManagerScript = GetComponent<PlayerManager>();
         ////playerManagerScript = GameObject.Find("Player").GetComponent("PlayerManager") as PlayerManager;
         
         //Call the InitGame function to initialize the first level 
@@ -47,8 +47,13 @@ public class GameManager : MonoBehaviour
 		//Call the SetupScene function of the LevelManager script, pass it current level number.
 		levelManagerScript.SetupScene(level);
 
+
+        // instantiate player here and get rid of the script
+        // stop the player script from creating it
+
+
         //// Call the SetupPlayer function of the PlayerManager script.
-        //playerManagerScript.SetupPlayer();
+        playerManagerScript.SetupPlayer();
 	}
 
 

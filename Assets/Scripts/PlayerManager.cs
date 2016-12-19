@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour {
     public bool isGrounded;
     public float speed;
 
-    public GameObject playerClone;
+    //public GameObject playerClone;
 
 
     //private int count;
@@ -27,9 +27,9 @@ public class PlayerManager : MonoBehaviour {
     void Start () 
 	{
         //rb = playerPrefab.GetComponent<Rigidbody>();
-        jump = 25.0f;
+        jump = 100f;
         isGrounded = true;
-        speed = 50;
+        speed = 5;
 
         //SpawnPlayer();
         //count = 0;
@@ -57,7 +57,7 @@ public class PlayerManager : MonoBehaviour {
     // physics code
     void FixedUpdate()
     {
-        Debug.Log("Player Fixed Update");
+        //Debug.Log("Player Fixed Update");
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
@@ -68,12 +68,11 @@ public class PlayerManager : MonoBehaviour {
         }
         //Debug.Log("movement x " + movement.x + " y " + movement.y + " z " + movement.z);
         //Debug.Log("speed " + speed);
-        playerClone.GetComponent<Rigidbody>().AddForce(movement * speed);
+        playerPrefab.GetComponent<Rigidbody>().AddForce(movement * speed);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collision");
         if (other.gameObject.CompareTag("Pick Up"))
         {
             other.gameObject.SetActive(false);
@@ -81,15 +80,15 @@ public class PlayerManager : MonoBehaviour {
             //count++;
             //SetCountText();
         }
-        else if (other.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+
     }
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("collissionsions");
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
     }
 
     //bool CheckWin ()
@@ -157,7 +156,7 @@ public class PlayerManager : MonoBehaviour {
     {
         
         //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current position cast it to GameObject.
-        playerClone = Instantiate(playerPrefab, new Vector3(0, 0.5f, 0), Quaternion.identity) as GameObject;
+        Instantiate(playerPrefab, new Vector3(0, 0.5f, 0), Quaternion.identity);
     }
 }
 
