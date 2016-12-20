@@ -7,10 +7,9 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 	private LevelManager levelManagerScript;                       //Store a reference to our LevelManager which will set up the level.
-    private PlayerManager playerManagerScript;                       //Store a reference to our PlayerManager which will set up the level.
     private int level = 1;                                  //Current level number
+    public GameObject playerPrefab;
 
-	//public GameObject ground;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -31,11 +30,7 @@ public class GameManager : MonoBehaviour
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad(gameObject);
 		//Get a component reference to the attached LevelManager script
-		levelManagerScript = GetComponent<LevelManager>();
-        ////Get a component reference to the attached PlayerManager script
-        playerManagerScript = GetComponent<PlayerManager>();
-        ////playerManagerScript = GameObject.Find("Player").GetComponent("PlayerManager") as PlayerManager;
-        
+		levelManagerScript = GetComponent<LevelManager>();        
         //Call the InitGame function to initialize the first level 
         InitGame();
 
@@ -47,16 +42,10 @@ public class GameManager : MonoBehaviour
 		//Call the SetupScene function of the LevelManager script, pass it current level number.
 		levelManagerScript.SetupScene(level);
 
+        //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current position cast it to GameObject.
+        Instantiate(playerPrefab, new Vector3(0, 0.5f, 0), Quaternion.identity);
 
-        // instantiate player here and get rid of the script
-        // stop the player script from creating it
-
-
-        //// Call the SetupPlayer function of the PlayerManager script.
-        playerManagerScript.SetupPlayer();
 	}
-
-
 
 	//Update is called every frame.
 	void Update()

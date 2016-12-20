@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 421764}
   - component: {fileID: 11439728}
   - component: {fileID: 11467680}
-  - component: {fileID: 114298852214745672}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -42,6 +41,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbdc3f7b345e8d48a908ceda41d6ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 1653871608075184, guid: 02b04646c2e6cf1448dd3bb2c4df9598,
+    type: 2}
 --- !u!114 &11467680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,19 +89,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172632}
   m_IsPrefabParent: 1
---- !u!114 &114298852214745672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56b1505868050748bafe8711496a2e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1653871608075184, guid: 02b04646c2e6cf1448dd3bb2c4df9598,
-    type: 2}
-  jump: 25
-  isGrounded: 1
-  speed: 5

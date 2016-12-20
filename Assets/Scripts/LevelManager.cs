@@ -58,13 +58,10 @@ public class LevelManager : MonoBehaviour
     {
         // instantiate grounds
         SpawnGrounds(level);
-
         // instantiate walls
         SpawnOuterWalls(level);
-
         // instantiate pickups
         SpawnPickups(level);
-
     }
 
     private void SpawnGrounds(int level)
@@ -155,9 +152,6 @@ public class LevelManager : MonoBehaviour
         } // end level 1
     } // end BuildWalls
 
-
-
-
     private void CreateHierarchyLayout()
     {
         // Instantiate holders and set its transform to position in the hierarchy. 
@@ -171,15 +165,3 @@ public class LevelManager : MonoBehaviour
         pickUpHolder.transform.SetParent(levelHolder);
     }
 }
-
-//old code
-// old way to do walls was an array prefab
-//      GameObject outerWallClone;
-//foreach (var outerwallPrefab in outerWallPrefabs)
-//{
-//	//Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current position cast it to GameObject.
-//	outerWallClone =
-//		Instantiate(outerwallPrefab, outerwallPrefab.transform.position, Quaternion.identity) as GameObject;
-//	//Set the parent of our newly instantiated object instance to levelHolder, this is just organizational to avoid cluttering hierarchy.
-//	outerWallClone.transform.SetParent(wallHolder);
-//}

@@ -5,29 +5,20 @@ using System;
 
 public class PlayerManager : MonoBehaviour {
 
-    //// Rigidbody component of Player Prefab
-    //public Rigidbody rb;
-
-
     public GameObject playerPrefab;                             // Player Prefab
     public float jump;
     public bool isGrounded;
     public float speed;
-
-    //public GameObject playerClone;
 
 
     //private int count;
     //private bool winner;
     //public Text countText;
     //public Text winText;
-
-
-
+    
     void Start () 
 	{
-        //rb = playerPrefab.GetComponent<Rigidbody>();
-        jump = 100f;
+        jump = 25f;
         isGrounded = true;
         speed = 5;
 
@@ -133,30 +124,5 @@ public class PlayerManager : MonoBehaviour {
     //	}
     //	return closest;
     //}
-
-    public void SetupPlayer()
-    {
-        // maybe pass in an object to upgrade players abilities
-
-        // instantiate player
-        SpawnPlayer();
-
-        //// set up the player
-        //SetPlayerUp();
-
-
-    }
-
-    private void SetPlayerUp()
-    {
-        // pass in object to setup up the player?
-    }
-
-    private void SpawnPlayer()
-    {
-        
-        //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current position cast it to GameObject.
-        Instantiate(playerPrefab, new Vector3(0, 0.5f, 0), Quaternion.identity);
-    }
 }
 
