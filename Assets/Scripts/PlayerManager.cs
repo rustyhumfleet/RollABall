@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour {
     
     void Start () 
 	{
-        jump = 25f;
+        jump = 100f;
         isGrounded = true;
         speed = 5;
 
