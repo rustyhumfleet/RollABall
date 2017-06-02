@@ -57,11 +57,11 @@ public class LevelManager : MonoBehaviour
     void LevelSetup(int level)
     {
         // instantiate grounds
-        SpawnGrounds(level);
+        //SpawnGrounds(level);
         // instantiate walls
-        SpawnOuterWalls(level);
+        //SpawnOuterWalls(level);
         // instantiate pickups
-        SpawnPickups(level);
+        //SpawnPickups(level);
     }
 
     private void SpawnGrounds(int level)
