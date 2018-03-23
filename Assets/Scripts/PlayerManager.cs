@@ -3,9 +3,12 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : MonoBehaviour
+{
 
     public GameObject playerPrefab;                             // Player Prefab
+    public GameObject spherePrefab;
+    public GameObject groundPrefab;
     public float jump;
     public bool isGrounded;
     public float speed;
@@ -15,9 +18,9 @@ public class PlayerManager : MonoBehaviour {
     //private bool winner;
     //public Text countText;
     //public Text winText;
-    
-    void Start () 
-	{
+
+    void Start()
+    {
         jump = 100f;
         isGrounded = true;
         speed = 5;
@@ -59,7 +62,39 @@ public class PlayerManager : MonoBehaviour {
         }
         //Debug.Log("movement x " + movement.x + " y " + movement.y + " z " + movement.z);
         //Debug.Log("speed " + speed);
+
         playerPrefab.GetComponent<Rigidbody>().AddForce(movement * speed);
+
+
+        //// shrink sphere
+        float targetScale = 0.1f;
+        float shrinkSpeed = 0.01f;
+
+        spherePrefab.transform.localScale = Vector3.Lerp(
+            spherePrefab.transform.localScale,
+            new Vector3(targetScale, targetScale, targetScale),
+            Time.deltaTime * shrinkSpeed);
+
+        //float yHeight = 2.0f;
+
+        //groundPrefab.GetComponent<Rigidbody>().transform.Translate(Vector3.up * Time.deltaTime * yHeight, Space.World);
+
+        ////groundPrefab.GetComponent<Rigidbody>().transform.position = new Vector3(
+        //    groundPrefab.transform.position.x,
+        //    groundPrefab.transform.position.y + yHeight,
+        //    groundPrefab.transform.position.z);
+
+
+
+        //// raise floor
+        //float yHeight = 0.1f;
+
+        //groundPrefab.transform.localPosition = Vector3.Lerp(
+        //    groundPrefab.transform.localPosition,
+        //    new Vector3(targetScale, targetScale * spherePrefab.transform.localPosition.y, targetScale),
+        //    Time.deltaTime * yHeight);
+
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -79,6 +114,11 @@ public class PlayerManager : MonoBehaviour {
         if (other.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+
+        if (other.gameObject.CompareTag("KillingFloor"))
+        {
+            Destroy(gameObject);
         }
     }
 
