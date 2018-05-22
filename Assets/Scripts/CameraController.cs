@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour {
 
 	public GameObject player;
 
+//test
 	private Vector3 offset;
     //test
 	// Use this for initialization
